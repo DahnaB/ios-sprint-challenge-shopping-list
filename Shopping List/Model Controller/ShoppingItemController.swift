@@ -28,6 +28,8 @@ class ShoppingItemController: Codable {
         }
     }
     
+    
+    
     func setUserDefault() {
         
         let itemNames = ["Apple", "Grapes", "Milk", "Muffin", "Popcorn", "Soda", "Strawberries"]
@@ -37,7 +39,6 @@ class ShoppingItemController: Codable {
                 let imageData = UIImagePNGRepresentation(image) else { return }
             self.items.append(ShoppingItem(name: item, itemAdded: false, itemImage: imageData))
         }
-        
     }
     
     var persistentFileURL: URL? {
@@ -81,4 +82,11 @@ class ShoppingItemController: Codable {
             print("Error decoding items: \(error)")
         }
     }
+    
+ 
+    
+    
+        
+    
+    
 }
