@@ -113,8 +113,8 @@
 		99D9BBD0242E5666000423BF /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				99D9BBD3242E5781000423BF /* ShoppingDetailViewController.swift */,
 				99D9BBCE242E54EE000423BF /* ShoppingListCollectionViewController.swift */,
+				99D9BBD3242E5781000423BF /* ShoppingDetailViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

@@ -8,37 +8,43 @@
 
 import UIKit
 
-class ShoppingItemController: Codable {
+class ShoppingItemController {
     
     var items: [ShoppingItem] = []
     
-    var addedItems: [ShoppingItem] {
-        
-        get {
-            let added: [ShoppingItem] = items.filter{item in item.itemAdded}
-            return added
+    init() {
+        if UserDefaults.standard.bool(forKey: .reloadItemOnce) {
+            loadFromPersistentStore()
+        } else {
+            setUserDefault()
         }
     }
-    
-    var notAddedItems: [ShoppingItem] {
-        
-        get {
-            let notAdded: [ShoppingItem] = items.filter{item in !item.itemAdded}
-            return notAdded
-        }
-    }
-    
-    
     
     func setUserDefault() {
         
         let itemNames = ["Apple", "Grapes", "Milk", "Muffin", "Popcorn", "Soda", "Strawberries"]
         
         for item in itemNames {
-            guard let image = UIImage(named: item),
-                let imageData = UIImagePNGRepresentation(image) else { return }
-            self.items.append(ShoppingItem(name: item, itemAdded: false, itemImage: imageData))
+            
+            self.items.append(ShoppingItem(name: item))
         }
+        saveToPersistentStore()
+        UserDefaults.standard.set(true, forKey: .reloadItemOnce)
+    }
+    
+    func updateItem(index: Int) {
+        items[index].itemAdded.toggle()
+        saveToPersistentStore()
+    }
+    
+    func itemsAddedCount() -> Int {
+        var count = 0
+        for item in items {
+            if item.itemAdded == true {
+                count += 1
+            }
+        }
+         return count
     }
     
     var persistentFileURL: URL? {
@@ -82,11 +88,4 @@ class ShoppingItemController: Codable {
             print("Error decoding items: \(error)")
         }
     }
-    
- 
-    
-    
-        
-    
-    
 }

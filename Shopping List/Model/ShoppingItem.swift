@@ -6,11 +6,14 @@
 //  Copyright © 2020 Lambda School. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct ShoppingItem: Codable {
-    let name: String
-    var itemAdded: Bool
-    var itemImage: Data
     
+    let name: String
+    var itemAdded: Bool = false
+    var itemImage: UIImage? {
+        guard let itemImage = UIImage(named: name) else { return nil }
+        return itemImage
+    }
 }
